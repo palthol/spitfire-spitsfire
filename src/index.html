@@ -14,7 +14,8 @@
         <h1 class="text-3xl font-bold">Spitfire Documentation</h1>
         <nav>
           <ul class="flex space-x-4">
-            <li><a href="#" class="hover:underline">Home</a></li>
+            <li><als
+               href="#" class="hover:underline">Home</a></li>
             <li><a href="#" class="hover:underline">About</a></li>
             <li><a href="#" class="hover:underline">Contact</a></li>
           </ul>
@@ -23,10 +24,11 @@
     </header>
     <main class="container p-4 mx-auto">
       <h2 class="mb-4 text-2xl font-bold">Main Content</h2>
+
       <div class="flex">
-        <!-- This div contains the images and will be aligned to the left with a fixed width -->
+        <!--images container-->
         <div class="w-1/4 p-6 border border-gray-300 md:w-1/3 lg:w-1/4">
-          <div class="grid grid-cols-1 gap-4">
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2 flex-2">
             <a href="#" class="block">
               <img src="./assets/images/Glacier-white.jpg" alt="Page 1" class="object-cover w-full h-32 rounded-lg shadow-md md:h-48 lg:h-32" />
             </a>
@@ -43,8 +45,17 @@
         </div>
         <!-- This div will take up the remaining space, pushing the images to the left -->
         <div class="flex-grow p-4">
-          <!-- Additional content can go here -->
           <p class="text-lg">This is the remaining space where additional content can be placed.</p>
+        </div>
+
+        <div class="w-1/4 p-4 bg-gray-100">
+          <h2 class="mb-4 text-xl font-bold">Previously Viewed Items</h2>
+          <ul>
+            <li class="mb-2">Item 1</li>
+            <li class="mb-2">Item 2</li>
+            <li class="mb-2">Item 3</li>
+            <li class="mb-2">Item 4</li>
+          </ul>
         </div>
       </div>
     </main>
