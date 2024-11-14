@@ -2,15 +2,15 @@
    
   document.addEventListener('DOMContentLoaded', () => {
     // Declare a variable that references the main element
-    const mainElement = document.querySelector('#css');
+    const mainElement = document.querySelector('#javaScript');
 
    
       // Create a new title element
     
-      const title = buildElement('h1', 'CSS', 'text-4xl font-bold text-center mt-4');    
+      const title = buildElement('h1', 'JavaScript', 'text-4xl font-bold text-center mt-4');    
       // Create a new header element
    
-      const mainHeader = buildElement('h2', 'What is CSS', 'main-header');
+      const mainHeader = buildElement('h2', 'What is JavaScript?', 'main-header');
 
       // Create a new paragraph element
       const paragraph = buildElement('p', 'LALALALALLALALA', 'paragraph');
