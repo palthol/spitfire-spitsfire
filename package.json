@@ -13,5 +13,9 @@
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",
     "vite": "^5.4.10"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.15",
+    "marked": "^15.0.0"
   }
 }

@@ -1,3 +1,35 @@
+// Imports
+import { marked } from 'marked';
+
+// Function to fetch and render Markdown content
+export async function renderMarkdown(markdownFile, containerId) {
+  try {
+    // Fetch the Markdown file
+    const response = await fetch(markdownFile);
+
+    // Check if the response is OK, if not, throw an error
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ${markdownFile}: ${response.statusText}`);
+    }
+
+    // Get the Markdown content that was fetched
+    const markdown = await response.text();
+    // Call your Markdown-to-HTML function here
+    const markedContent = marked(markdown); 
+
+    // Inject the HTML content into the specified container
+    const container = document.getElementById(containerId);
+    if (!container) {
+      throw new Error(`Container with ID "${containerId}" not found.`);
+    }
+    container.innerHTML = markedContent;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
+
 
 // MODAL LOGIC
 
@@ -46,8 +78,6 @@ function buildElement(tag, text, className) {
   // Return the element
   return element;
 }
-
-
 
 document.addEventListener("DOMContentLoaded", function() {
   // Function to display visited pages
