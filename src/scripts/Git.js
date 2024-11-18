@@ -11,6 +11,25 @@
   renderMarkdown(markdownFile, containerId);
   });     
   
+    //Function to show if the tab is visible or hidden
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        // Log if the tab is visible
+        console.log('Tab is now in view!');
+      } else {
+        // Log if the tab is hidden
+        console.log('Tab is now hidden!');
+      }
+     });
+     
+     //Function to show if the mouse is over the document
+     document.addEventListener('mouseover', (event) => {
+      // Check if the mouse is over the document
+       if (event.target.matches('hover:underline')) {
+          // Log if the mouse is over the document
+         console.log('Mouse is over the document!');
+       }
+     });
   
   // document.addEventListener('DOMContentLoaded', () => {
         // Declare a variable that references the main element
