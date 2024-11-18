@@ -5,8 +5,8 @@
 
   document.addEventListener('DOMContentLoaded', () => {
   
-  const markdownFile = '../content/git.md';
-  const containerId = 'git-content';
+  const markdownFile = '../content/html.md';
+  const containerId = 'html-content';
   
   renderMarkdown(markdownFile, containerId);
   });     

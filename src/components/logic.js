@@ -79,6 +79,10 @@ function buildElement(tag, text, className) {
   return element;
 }
 
+
+
+// visited pages logic
+
 document.addEventListener("DOMContentLoaded", function() {
   // Function to display visited pages
   function displayVisitedPages() {
@@ -93,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     }
   }
+
 
   // Display visited pages on page load
   displayVisitedPages();

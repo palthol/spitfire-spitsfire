@@ -1,12 +1,11 @@
   //  buildElement is a function inside logic.js
-   
   import { renderMarkdown } from '../components/logic.js';
 
 
   document.addEventListener('DOMContentLoaded', () => {
   
-  const markdownFile = '../content/git.md';
-  const containerId = 'git-content';
+  const markdownFile = '../content/css.md';
+  const containerId = 'css-content';
   
   renderMarkdown(markdownFile, containerId);
   });     
