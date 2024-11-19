@@ -1,6 +1,6 @@
-# Documentation Website for Software Development Concepts
+# Spitfire Documentation
 
-Welcome to our documentation website! This project serves as a comprehensive resource for all the topics and concepts we have learned and applied as software developers. By breaking down complex topics into manageable components, we provide explanations and examples that help users understand, create, and manipulate these tools effectively.
+Welcome to Spitfire Documentation! This project serves as a comprehensive resource for all the topics and concepts we have learned and applied as software developers. By breaking down complex topics into manageable components, we provide explanations and examples that help users understand, create, and manipulate these tools effectively.
 
 ---
 
@@ -29,7 +29,7 @@ To get the project running locally, follow these steps:
    ```bash
 
    npm run dev
-   
+
    ```
 
    This will start a live server for your local environment.
