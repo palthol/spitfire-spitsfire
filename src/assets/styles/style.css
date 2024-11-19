@@ -12,6 +12,11 @@
 
 body {
     background: linear-gradient(90deg, #d4eaf8 0%, #DDBEA7 100%);
+    
+}
+
+header {
+    margin-bottom: 20px;
 }
 
 footer{

@@ -1,4 +1,4 @@
-## What is JavaScript?
+# What is JavaScript?
 
 JavaScript is a versatile, high-level programming language primarily used to create dynamic and interactive effects within web browsers. It is one of the core technologies of the web, alongside HTML (which defines the structure of a webpage) and CSS (which defines how that structure looks).
 
