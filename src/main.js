@@ -1,148 +1,155 @@
 // Imports
 import { marked } from 'marked';
+// exports
+export { renderMarkdown };
 
-// 1. FUNCTION TO RENDER MARKDOWN FILES IN HTML  1.
-export async function renderMarkdown(markdownFile, containerId) {
-  try {
-    // Fetch the Markdown file
-    const response = await fetch(markdownFile);
 
-    // Check if the response is OK, if not, throw an error
-    if (!response.ok) {
-      throw new Error(`Failed to fetch ${markdownFile}: ${response.statusText}`);
+    // 1. FUNCTION TO RENDER MARKDOWN FILES IN HTML
+   async function renderMarkdown(markdownFile, containerId) {
+        try {
+            const response = await fetch(markdownFile);
+            if (!response.ok) {
+                throw new Error(`Failed to fetch ${markdownFile}: ${response.statusText}`);
+            }
+            const markdown = await response.text();
+            const markedContent = marked(markdown);
+
+            const container = document.getElementById(containerId);
+            if (!container) {
+                throw new Error(`Container with ID "${containerId}" not found.`);
+            }
+            container.innerHTML = markedContent;
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    // Get the Markdown content that was fetched
-    const markdown = await response.text();
-    // Call your Markdown-to-HTML function here
-    const markedContent = marked(markdown); 
+    document.addEventListener("DOMContentLoaded", async function () {
 
-    // Inject the HTML content into the specified container
-    const container = document.getElementById(containerId);
-    if (!container) {
-      throw new Error(`Container with ID "${containerId}" not found.`);
+        // Initialize the Name Modal logic
+    await initializeNameModalLogic();
+
+        // Update and Display Visited Pages
+    const pageName = document.title || window.location.pathname;
+    updateVisitedPages(pageName);
+    
+    const updatedPages = JSON.parse(localStorage.getItem('viewedPages')) || [];
+    displayVisitedPages(updatedPages);
+
+
+
+    // 2. MODAL LOGIC
+    // ABOUT MODAL
+    const openModalButton = document.getElementById('openModal');
+    const closeModalButton = document.getElementById('closeModal');
+    const aboutModal = document.getElementById('aboutmodal');
+
+    // Show the About modal
+    if (openModalButton && closeModalButton && aboutModal) {
+        openModalButton.addEventListener('click', () => {
+            aboutModal.classList.remove('hidden');
+        });
+
+        closeModalButton.addEventListener('click', () => {
+            aboutModal.classList.add('hidden');
+        });
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (event) => {
+            if (event.target === aboutModal) {
+                aboutModal.classList.add('hidden');
+            }
+        });
     }
-    container.innerHTML = markedContent;
-  } catch (error) {
-    console.error(error);
-  }
-}
 
-
-
-
-// 2. MODAL LOGIC  2.
-
-document.addEventListener('DOMContentLoaded', () => {
-
-  // Initialize variables that reference the open modal button, close modal button, and the modal inside index.html
-  const openModalButton = document.getElementById('openModal');
-  const closeModalButton = document.getElementById('closeModal');
-  const modal = document.getElementById('modal');
-
-  // show the modal
-  openModalButton.addEventListener('click', () => {
-    modal.classList.remove('hidden');
-  });
-
-  // hide the modal
-  closeModalButton.addEventListener('click', () => {
-    modal.classList.add('hidden');
-  });
-
-  // Close the modal when clicking outside of it
-  window.addEventListener('click', (event) => {
-    if (event.target === modal) {
-      modal.classList.add('hidden');
-    }
-  });
-});
-
-
-// 3. BUILD ELEMENT LOGIC  3.
-
-
-// Create a function that creates a text element and appends it to the DOM
-function buildElement(tag, text, className) {
-  // Create the element
-  const element = document.createElement(tag);
-
-  // Set the text content
-  element.textContent = text;
-
-  // Set the class name
-  if (className) {
-    element.className = className;
-  }
-
-  // Return the element
-  return element;
-}
-
-
-
-// 4. BUILD ELEMENT LOGIC  4.
-document.addEventListener("DOMContentLoaded", function () {
-  // Function to create an element with a class and text content
-  function buildElement(tag, textContent, className) {
-    const element = document.createElement(tag);
-    element.textContent = textContent;
-    if (className) {
-      element.classList.add(className);
-    }
-    return element;
-  }
-
-
-  // 5. VISITED PAGES LOGIC  5.
+    // 3. NAME MODAL LOGIC
+    async function initializeNameModalLogic() {
+      const previouslyViewedPages = JSON.parse(localStorage.getItem("viewedPages")) || [];
+      const nameModal = document.getElementById("nameModal");
+      const nameSubmitBtn = document.getElementById("nameSubmitBtn");
+      const userNameInput = document.getElementById("userNameInput");
+      const headerTitle = document.getElementById("headerTitle");
   
-  function displayVisitedPages() {
-    const storedVisitedPages = JSON.parse(localStorage.getItem('visitedPages')) || [];
-    const visitedPagesContainer = document.getElementById('visitedPagesContainer');
+      // Debugging: check if the elements are being accessed correctly
+      console.log('headerTitle:', headerTitle);
+  
+      if (!headerTitle) {
+          console.error("Element with ID 'headerTitle' was not found in the DOM.");
+          return; // Prevent further execution to avoid setting properties of null
+      }
+  
+      let userName = localStorage.getItem("userName") || "User";
+  
+      if ((!previouslyViewedPages || previouslyViewedPages.length === 0) && userName === "User") {
+          headerTitle.textContent = `Welcome to the page, ${userName}. You have no previously viewed files!`;
+          nameModal.classList.remove("hidden");
+  
+          nameSubmitBtn.addEventListener("click", function () {
+              const inputName = userNameInput.value.trim();
+              if (inputName) {
+                  localStorage.setItem("userName", inputName);
+                  userName = inputName;
+                  nameModal.classList.add("hidden");
+                  headerTitle.textContent = `Welcome to the page, ${userName}. You have no previously viewed files!`;
+              } else {
+                  alert("Please enter your name to continue.");
+              }
+          });
+      } else {
+          headerTitle.textContent = `Hello ${userName}, these are your previously viewed files`;
+      }
+  
+      // Call displayVisitedPages to update the UI
+      displayVisitedPages(previouslyViewedPages);
+  }
 
-    if (visitedPagesContainer) {
-      visitedPagesContainer.innerHTML = ''; // Clear existing content
-      storedVisitedPages.forEach(page => {
-        const pageElement = buildElement('li', page, 'visited-page');
-        visitedPagesContainer.appendChild(pageElement);
-      });
+    // 4. FUNCTION TO DISPLAY VISITED PAGES
+    function displayVisitedPages(pages) {
+        const visitedPagesContainer = document.getElementById('visitedPagesContainer');
+        if (visitedPagesContainer) {
+            visitedPagesContainer.innerHTML = '';
+
+            if (!pages || pages.length === 0) {
+                const listItem = document.createElement("li");
+                listItem.textContent = "No pages viewed yet!";
+                listItem.classList.add("text-gray-500");
+                visitedPagesContainer.appendChild(listItem);
+            } else {
+                pages.forEach(page => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = page; // Adjust to the format of your stored pages
+                    listItem.classList.add("hover:text-blue-600", "cursor-pointer");
+                    visitedPagesContainer.appendChild(listItem);
+                });
+            }
+        }
     }
-  }
 
-  // Function to update visited pages in localStorage
-  function updateVisitedPages(pageName) {
-    // Exclude the home page titled "Spitfire Documentation"
-    if (pageName === "Spitfire Documentation") return;
+    // 5. FUNCTION TO UPDATE VISITED PAGES IN LOCALSTORAGE
+    function updateVisitedPages(pageName) {
+        if (pageName === "Spitfire Documentation") return;
 
-    let globalVisitedPages = JSON.parse(localStorage.getItem('visitedPages')) || [];
+        let globalVisitedPages = JSON.parse(localStorage.getItem('viewedPages')) || [];
+        globalVisitedPages = globalVisitedPages.filter(page => page !== pageName);
+        globalVisitedPages.unshift(pageName);
+        localStorage.setItem('viewedPages', JSON.stringify(globalVisitedPages));
 
-    // Remove the page if it already exists in the array
-    globalVisitedPages = globalVisitedPages.filter(page => page !== pageName);
+        // Debug: Log updated pages to the console
+        console.log('Updated visited pages:', globalVisitedPages);
+    }
 
-    // Add the page to the beginning of the array
-    globalVisitedPages.unshift(pageName);
+  
 
-    // Save the updated array to localStorage
-    localStorage.setItem('visitedPages', JSON.stringify(globalVisitedPages));
-  }
+  
 
-  // Track the current page
-  const pageName = document.title || window.location.pathname;
-
-  // Update the visited pages in localStorage
-  updateVisitedPages(pageName);
-
-  // Display the visited pages
-  displayVisitedPages();
+    // 7. VISIBILITY CHANGE LOGIC
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+            console.log('Tab is now in view!');
+        } else {
+            console.log('Tab is now hidden!');
+        }
+    });
+    
 });
 
-  //  6. FUNCTION TO CHECK IF TAB IS VISIBLE  6.
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') {
-      // Log if the tab is visible
-      console.log('Tab is now in view!');
-    } else {
-      // Log if the tab is hidden
-      console.log('Tab is now hidden!');
-    }
-   });

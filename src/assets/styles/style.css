@@ -11,8 +11,50 @@
 }
 
 body {
-    background: linear-gradient(90deg, #d4eaf8 0%, #DDBEA7 100%);
-    
+    background: linear-gradient(90deg, #d4eaf8 0%, #E6D0F2 50%, #DDBEA7 100%);
+    background-size: 200% 200%;
+    animation: gradient-animation 10s ease infinite;
+}
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+.hover-parent {
+    position: relative;
+    overflow: hidden;
+}
+
+.img-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: background 0.5s ease;
+    border-radius: 0.5rem; /* Matches the rounded corners of the image */
+}
+
+.hover-parent:hover .img-container {
+    background: linear-gradient(135deg, #d4eaf8, #E6D0F2, #DDBEA7);
+}
+
+.hover-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+    border-radius: 0.5rem; /* Matches the rounded corners */
+}
+
+.hover-parent:hover .hover-image {
+    transform: scale(1.05); /* Slight zoom effect */
+    opacity: 0.9; /* Slightly reduce the opacity to reveal the gradient background */
 }
 
 header {

@@ -34,29 +34,51 @@
 
 
       <!--images container-->
+      
       <section class="w-2/3 p-6 border border-gray-300 bg-blue-50">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 flex-2">
-          <a href="./git.html" class="block">
-            <img src="./assets/images/git.webp" alt="Page 1"
-              class="object-cover w-full h-full rounded-lg shadow-md md:h-48 lg:h-32" />
-          </a>
-          <a href="./HTML.html" class="block">
-            <img src="./assets/images/HTML5.webp" alt="Page 2"
-              class="object-cover w-full h-full rounded-lg shadow-md md:h-48 lg:h-32" />
-          </a>
-          <a href="./CSS.html" class="block">
-            <img src="./assets/images/CSS.webp" alt="Page 3"
-              class="object-cover w-full h-full rounded-lg shadow-md md:h-48 lg:h-32" />
-          </a>
-          <a href="./JS.html" class="block">
-            <img src="./assets/images/Javascript.webp" alt="Page 4"
-              class="object-cover w-full h-full rounded-lg shadow-md md:h-48 lg:h-32" />
-          </a>
+            <a href="./git.html" class="block hover-parent">
+                <div class="img-container">
+                    <img src="./assets/images/git.webp" alt="Page 1"
+                        class="object-cover w-full h-full rounded-lg shadow-md md:h-48 lg:h-32 hover-image" />
+                </div>
+            </a>
+            <a href="./HTML.html" class="block hover-parent">
+                <div class="img-container">
+                    <img src="./assets/images/HTML5.webp" alt="Page 2"
+                        class="object-cover w-full h-full rounded-lg shadow-md md:h-48 lg:h-32 hover-image" />
+                </div>
+            </a>
+            <a href="./CSS.html" class="block hover-parent">
+                <div class="img-container">
+                    <img src="./assets/images/CSS.webp" alt="Page 3"
+                        class="object-cover w-full h-full rounded-lg shadow-md md:h-48 lg:h-32 hover-image" />
+                </div>
+            </a>
+            <a href="./JS.html" class="block hover-parent">
+                <div class="img-container">
+                    <img src="./assets/images/Javascript.webp" alt="Page 4"
+                        class="object-cover w-full h-full rounded-lg shadow-md md:h-48 lg:h-32 hover-image" />
+                </div>
+            </a>
         </div>
+    </section>
 
 
         <!-- Modal Structure -->
-        <div id="modal" class="fixed inset-0 flex items-center justify-center hidden bg-black bg-opacity-50">
+
+
+        <div id="nameModal" class="fixed top-0 left-0 flex items-center justify-center hidden w-full h-full bg-gray-900 bg-opacity-50">
+          <div class="w-1/3 p-6 text-center bg-white rounded shadow-lg">
+              <h2 class="mb-4 text-xl font-bold">What's your name?</h2>
+              <input type="text" id="userNameInput" class="w-full p-2 mb-4 border border-gray-300 rounded" placeholder="Enter your name">
+              <button id="nameSubmitBtn" class="px-4 py-2 text-white bg-blue-500 rounded">Submit</button>
+          </div>
+      </div>
+
+
+
+        <div id="aboutmodal" class="fixed inset-0 flex items-center justify-center hidden bg-black bg-opacity-50">
           <div class="w-1/3 p-6 bg-white rounded-lg shadow-lg">
             <h2 class="mb-4 text-2xl font-bold">About Us</h2>
             <p class="mb-4 text-lg">Project Group 1 collaborated on this documentation website that contains the
@@ -72,8 +94,8 @@
       <section class="flex-grow p-4"></section>
 
       <!-- Dynamic aside island -->
-      <section class="w-1/4 p-4 border border-gray-300 bg-blue-50">
-        <h2 class="mb-4 text-xl font-bold">Previously Viewed documents</h2>
+      <section id="island" class="w-1/4 p-4 border border-gray-300 bg-blue-50">
+        <h2 id="headerTitle" class="mb-4 text-xl font-bold">Welcome</h2>
         <ul id="visitedPagesContainer"></ul>
       </section>
     </div>
