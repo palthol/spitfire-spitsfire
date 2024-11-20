@@ -5,6 +5,8 @@ export default defineConfig({
   build: {
     outDir: '../dist',
     emptyOutDir: true,
+    assetsDir: 'src/assets', // Ensure assets are placed in the correct folder
+
     rollupOptions: {
       input: {
         main: './src/index.html',
