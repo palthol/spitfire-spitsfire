@@ -153,3 +153,4 @@ export { renderMarkdown };
     
 });
 
+console.log(marked('# Test Markdown')); // Output: <h1>Test Markdown</h1>
