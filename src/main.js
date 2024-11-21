@@ -150,6 +150,40 @@ export { renderMarkdown };
             console.log('Tab is now hidden!');
         }
     });
+
+    let lastScrollTop = 0;
+const footer = document.querySelector('footer');
+let hideTimeout = null;
+
+window.addEventListener('scroll', () => {
+  let scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+  // Check scroll direction
+  if (scrollTop > lastScrollTop) {
+    // Scrolling down, hide the footer
+    if (footer) {
+      footer.style.transition = 'transform 0.5s ease';
+      footer.style.transform = 'translateY(100%)'; // Moves footer out of view
+    }
+
+    // Set timeout to make the footer stay hidden for a while after scrolling stops
+    if (hideTimeout) {
+      clearTimeout(hideTimeout);
+    }
+    hideTimeout = setTimeout(() => {
+      if (footer) {
+        footer.style.transform = 'translateY(100%)';
+      }
+    }, 1000); // Keep footer hidden for 1 second after stopping
+
+  } else if (footer) {
+    // Scrolling up, show the footer
+    footer.style.transform = 'translateY(0)';
+  }
+
+  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+});
+
     
 });
 
